@@ -8,7 +8,6 @@ def press(key):
     keys.append(key)
     write_file(keys)
     keys =[]
-
 def release(key):
     pass
 
