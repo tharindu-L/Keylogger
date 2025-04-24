@@ -1,1 +1,1 @@
-['m']['y'][<Key.space: ' '>]['n']['a']['m']['e'][<Key.space: ' '>]['i']['s'][<Key.space: ' '>]['t']['r']['h']['a']['m']['y'][<Key.space: ' '>]['n']['a']['m']['e'][<Key.space: ' '>]['i']['s'][<Key.ctrl_l: <162>>]['\x01'][<Key.backspace: <8>>][<Key.alt_l: <164>>][<Key.tab: <9>>]
+
