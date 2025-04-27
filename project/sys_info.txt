@@ -1,0 +1,10 @@
+Couldn't get public IP AddressProcessor info : Intel64 Family 6 Model 78 Stepping 3, GenuineIntel
+System info : Windows
+Version info : 10.0.19045
+Machine info : AMD64
+Couldn't get public IP Address
+Local IP Address : 192.168.216.1
+Processor info : Intel64 Family 6 Model 78 Stepping 3, GenuineIntel
+System info : Windows
+Version info : 10.0.19045
+Machine info : AMD64
