@@ -1,0 +1,7 @@
+[Key.backspace]
+[Key.ctrl]
+v[Key.enter]
+[Key.backspace]
+[Key.backspace]
+[Key.backspace]
+[Key.esc]
