@@ -33,31 +33,3 @@ Processor info : x86_64
 System info : Linux
 Version info : #60~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 28 16:09:21 UTC 2
 Machine info : x86_64
-Couldn't get public IP Address
-Host Name : tharindu
-Private IP Address : 127.0.1.1
-Processor info : x86_64
-System info : Linux
-Version info : #60~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 28 16:09:21 UTC 2
-Machine info : x86_64
-Couldn't get public IP Address
-Host Name : tharindu
-Private IP Address : 127.0.1.1
-Processor info : x86_64
-System info : Linux
-Version info : #60~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 28 16:09:21 UTC 2
-Machine info : x86_64
-Couldn't get public IP Address
-Host Name : tharindu
-Private IP Address : 127.0.1.1
-Processor info : x86_64
-System info : Linux
-Version info : #60~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 28 16:09:21 UTC 2
-Machine info : x86_64
-Couldn't get public IP Address
-Host Name : tharindu
-Private IP Address : 127.0.1.1
-Processor info : x86_64
-System info : Linux
-Version info : #60~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 28 16:09:21 UTC 2
-Machine info : x86_64
