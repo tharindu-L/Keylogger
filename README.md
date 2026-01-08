@@ -27,11 +27,12 @@ Only run this on your own machine or systems where you have permission.
    ```bash
    git clone https://github.com/tharindu-L/Keylogger.git
    cd Keylogger
-   '''
+   
 2. Run the keyloger
    ```bash
    python keylogger.py
-   '''
+   
 
 ## 👍 Show Your Support
    Give a ⭐ if you found this project helpful!
+
